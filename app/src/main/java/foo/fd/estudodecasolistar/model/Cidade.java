@@ -5,6 +5,8 @@ public class Cidade {
     private int id;
     private String nome;
     private String sigla;
+    private int estadoID;
+
 
     public Cidade(){}
 
@@ -13,6 +15,7 @@ public class Cidade {
         this.setId(id);
         this.setNome(nome);
         this.setSigla(sigla);
+
     }
 
     public int getId() {
@@ -38,5 +41,7 @@ public class Cidade {
     public void setNome(String nome) {
         this.nome = nome;
     }
+
+
 }
 

@@ -10,14 +10,39 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
-import android.widget.Toast;
+import android.widget.EditText;
+import android.widget.TextView;
 
+import java.util.List;
+
+import foo.fd.estudodecasolistar.controller.ControllerCidade;
+import foo.fd.estudodecasolistar.model.Cidade;
+import foo.fd.estudodecasolistar.model.DeletarCidadeAsyncTask;
+import foo.fd.estudodecasolistar.model.DeletarEstadoAsyncTask;
 import foo.fd.estudodecasolistar.model.ListarCidadeAsyncTask;
 import foo.fd.estudodecasolistar.R;
 import foo.fd.estudodecasolistar.model.ListarEstadoAsyncTask;
 
 public class MainActivity extends AppCompatActivity {
-    Button buscarCidade,buscarEstado;
+    Button btnBuscarEstado;
+    Button btnBuscarCidade;
+    Button btnPesquisarCidade;
+    Button btnDeletarCidade;
+    Button btnAlterarCidade;
+
+    EditText deleteCidade;
+    EditText deleteEstado;
+    EditText editNomeCidade;
+    TextView txtResultado;
+
+    ControllerCidade  controllerCidade;
+    List<Cidade> cidadeList;
+    Cidade obj;
+    Integer idCidade;
+    String token = "fabricadedesenvolvedor";
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,28 +50,72 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        buscarCidade = (Button) findViewById(R.id.idCidade);
-        buscarEstado = (Button) findViewById(R.id.idEstado);
+        btnBuscarCidade = (Button) findViewById(R.id.btnListarCidades);
+        btnBuscarEstado = (Button) findViewById(R.id.btnListarEstados);
+        btnPesquisarCidade = (Button) findViewById(R.id.btnPesquisarCidade);
+//        btnAlterarCidade = (Button) findViewById(R.id.btnDeletarCidade);
+        btnDeletarCidade = (Button) findViewById(R.id.btnDeletarCidade);
+        deleteCidade =  (EditText)  findViewById(R.id.editCidade);
+        deleteEstado =  (EditText) findViewById(R.id.editCidade);
+        txtResultado = (TextView) findViewById(R.id.txtResultado);
 
-        buscarCidade.setOnClickListener(new View.OnClickListener() {
+//
+
+        btnBuscarCidade.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ListarCidadeAsyncTask task = new ListarCidadeAsyncTask("fabricadedesenvolvedor");
+                ListarCidadeAsyncTask task = new ListarCidadeAsyncTask(token);
                 task.execute();
                 Log.i("APIListar","buscarCidade()");
             }
         });
 
-        buscarEstado.setOnClickListener(new View.OnClickListener() {
+        btnBuscarEstado.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                ListarEstadoAsyncTask task2 = new ListarEstadoAsyncTask("fabricadedesenvolvedor");
+                ListarEstadoAsyncTask task2 = new ListarEstadoAsyncTask(token);
                 task2.execute();
                 Log.i("APIListar","buscarEstado()");
             }
         });
 
+        btnDeletarCidade.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(btnDeletarCidade != null){
+                    idCidade = Integer.parseInt(deleteCidade.getText().toString());
+                    Log.i("APIListar","btnDeletarCidade():  " + idCidade);
+
+                    DeletarCidadeAsyncTask task = new DeletarCidadeAsyncTask(token, idCidade);
+                    task.execute();
+
+                }else{
+                    txtResultado.setText("Informe ID da cidade");
+                }
+
+            }
+        });
+
+        deleteEstado.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                idCidade = Integer.parseInt(deleteCidade.getText().toString());
+                Log.i("APIListar","btnDeletarCidade():  " + idCidade);
+
+                DeletarEstadoAsyncTask task = new DeletarEstadoAsyncTask(token, idCidade);
+                task.execute();
+
+            }
+        });
+
+        btnPesquisarCidade.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                
+            }
+        });
 
 
 
@@ -62,6 +131,9 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
+
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

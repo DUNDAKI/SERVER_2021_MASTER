@@ -19,14 +19,15 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 import foo.fd.estudodecasolistar.model.Cidade;
+import foo.fd.estudodecasolistar.utils.GetIp;
 
 public class ListarCidadeAsyncTask extends AsyncTask<String, String, String> {
 
     private Button getCidade, getEstado;
 
-    String ip = "10.0.0.104";
-    String ip2 = "192.168.1.108";
-    String  caminho = "http://"+ip+"/curso_udemy/exer/APIListarCidades.php";
+    GetIp getIp = new GetIp();
+    String ip3 = getIp.getListarCidade();
+
     String query;
     HttpURLConnection conn;
     URL url = null;
@@ -35,7 +36,7 @@ public class ListarCidadeAsyncTask extends AsyncTask<String, String, String> {
     final  int READ_TIME_OUT = 10000;
     final  int CONNECTION_TIME_OUT = 30000;
 
-    final String URL_WEB_SERVICE = caminho;
+    final String URL_WEB_SERVICE = ip3;
 
     String api_token;
     public ListarCidadeAsyncTask(String token){
@@ -164,7 +165,7 @@ public class ListarCidadeAsyncTask extends AsyncTask<String, String, String> {
                             jsonObject.getString("cidade"),
                             jsonObject.getString("estado"));
 
-                    Log.i("APIListar", "Estado ==> " + estado.getId() + " - "
+                    Log.i("APIListar", "Cidade ==> " + estado.getId() + " - "
                             + estado.getNome() + " - " + estado.getSigla());
                 }
             }
