@@ -7,6 +7,7 @@ import android.support.v4.app.SupportActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.json.JSONObject;
 
@@ -48,7 +49,26 @@ public class DeletarCidadeAsyncTask
 
     int response_code;
 
+    public DeletarCidadeAsyncTask(TextView txtResultado, int idCidade) {
+        this.txtResultado = txtResultado;
+        this.idCidade = idCidade;
+    }
 
+    public TextView getTxtResultado() {
+        return txtResultado;
+    }
+
+    public void setTxtResultado(TextView txtResultado) {
+        this.txtResultado = txtResultado;
+    }
+
+    public int getIdCidade() {
+        return idCidade;
+    }
+
+    public void setIdCidade(int idCidade) {
+        this.idCidade = idCidade;
+    }
 
     public DeletarCidadeAsyncTask(String token, int idCidade) {
 
@@ -193,6 +213,7 @@ public class DeletarCidadeAsyncTask
             if (jsonObject.getBoolean("deletado")) {
 
                 txtResultado.setText("Registro Deletado: "+idCidade);
+
 
                 Log.i("APIListar", "onPostExecute()--> Deletado com Sucesso");
 

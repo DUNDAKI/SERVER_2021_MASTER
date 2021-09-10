@@ -64,7 +64,7 @@
         android:text="DELETAR"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/txtResultado"
+        app:layout_constraintStart_toEndOf="@+id/txtResultadoCidade"
         app:layout_constraintTop_toBottomOf="@+id/btnAlterarCidade" />
 
     
@@ -98,7 +98,7 @@
         app:layout_constraintTop_toBottomOf="@+id/btnPesquisarCidade" />
 
     <TextView
-        android:id="@+id/txtResultado"
+        android:id="@+id/txtResultadoCidade"
         android:layout_width="match_parent"
         android:layout_height="31dp"
         android:layout_marginStart="20dp"
