@@ -2,7 +2,7 @@ package foo.fd.estudodecasolistar.controller;
 
 import java.util.List;
 
-import foo.fd.estudodecasolistar.model.Cidade;
+import foo.fd.estudodecasolistar.controller.MODEL2.Cidade;
 
 public class ControllerCidade {
     /**
